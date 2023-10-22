@@ -1,46 +1,52 @@
-CC=gcc -O0 -g
-CFLAGS=-std=c11 -Wall -Werror -Wextra
+CC=g++ #gcc -O0 -g
+CFLAGS=-std=c++17 -Wall -Werror -Wextra
 PROFILE_FLAGS = -fprofile-arcs -ftest-coverage
-LIBSOURCES=s21_smartcalc.c
-LIBOBJECTS=$(LIBSOURCES:.c=.o)
+LIBSOURCES=controller/controller.cc model/model.cc model/credit_model.cc
+LIBOBJECTS=$(LIBSOURCES:.cc=.o)
 
 TETEX=texi2dvi
 
 OS = $(shell uname)
 
 ifeq ($(OS), Linux)
-	CHECKFLAGS=-lcheck -lm -lpthread -lrt -lsubunit
+	CHECKFLAGS=-lgtest -lm -lpthread -lrt -lsubunit
 else
-	CHECKFLAGS=-lcheck -lm -lpthread
+	CHECKFLAGS=-lgtest -lm -lpthread
 endif
 
-all: test
+all: tests
 
-s21_smartcalc.a: $(LIBOBJECTS)
-	ar -crs s21_smartcalc.a $(LIBOBJECTS)
+controller.a: $(LIBOBJECTS)
+	ar -crs controller.a $(LIBOBJECTS)
 	rm -f *.o
 
-test: clean test.c s21_smartcalc.a
-	$(CC) $(CFLAGS) test.c $(LIBSOURCES) -o run $(CHECKFLAGS) -lgcov --coverage
+tests: clean test/test.cc controller.a
+	$(CC) $(CFLAGS) test/test.cc $(LIBSOURCES) -o run $(CHECKFLAGS) -lgcov --coverage
 	./run
 
-gcov_report: test
+gcov_report: tests
 	lcov -t "test" -o report.info -c -d .
 	genhtml -o report report.info
 	open ./report/index.html
 
 install: test cppcheck
 	mkdir ../build
-	cd ../build; qmake ../src/SmartCalcV1.pro
+	cd ../build; qmake ../src/view/SmartCalcV1.pro
 	# ./SmartCalcV1
 	make -C ../build
+
+open:
+	./../build/SmartCalcV1
 
 uninstall: clean
 	rm -rf ../build
 
 cppcheck:
 	cp ../materials/linters/.clang-format .clang-format
-	clang-format -n *.c *.h *.cpp
+	clang-format -n controller/*.cc controller/*.h \
+					model/*.cc model/*.h \
+					view/*.cpp view/*.h \
+					test/test.cc
 	rm .clang-format
 
 dvi:
@@ -80,4 +86,7 @@ clean:
 					gcov \
 					report/ \
 					../app/ \
-					report.info
+					report.info \
+					controller/*.o \
+					model/*.o
+
