@@ -2,6 +2,7 @@
 
 #include "ui_result_credit.h"
 
+namespace s21 {
 Result_credit::Result_credit(QWidget *parent)
     : QWidget(parent), ui(new Ui::Result_credit) {
   ui->setupUi(this);
@@ -38,8 +39,9 @@ void Result_credit::add_to_table(double **result, int months, double sum,
   ui->tableWidget->resizeColumnsToContents();
 
   for (int i = 0; i < months; i++) {
-    free(result[i]);
+    delete[] result[i];
   }
-  free(result);
+  delete result;
   result = NULL;
+}
 }

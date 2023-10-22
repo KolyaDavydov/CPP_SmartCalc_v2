@@ -1,7 +1,7 @@
 #include "credit.h"
 
 #include "ui_credit.h"
-
+namespace s21 {
 Credit::Credit(QWidget *parent) : QWidget(parent), ui(new Ui::Credit) {
   ui->setupUi(this);
 
@@ -18,11 +18,12 @@ void Credit::show_result() {
 
   double **result = NULL;
   if (ui->radioButton_Ann->isChecked()) {
-    result = annuity_credit_calc(sum, months, percent);
+    result = controller_.Annuity_credit_calc(sum, months, percent);
     result_credit_window->show();
   } else {
-    result = dif_credit_calc(sum, months, percent);
+    result = controller_.Dif_credit_calc(sum, months, percent);
     result_credit_window->show();
   }
   result_credit_window->add_to_table(result, months, sum, percent);
+}
 }

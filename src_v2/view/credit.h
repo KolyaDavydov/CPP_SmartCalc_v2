@@ -5,6 +5,7 @@
 
 #include "result_credit.h"
 
+#include "../controller/controller.h"
 extern "C" {
 #include "s21_smartcalc.h"
 }
@@ -12,7 +13,7 @@ extern "C" {
 namespace Ui {
 class Credit;
 }
-
+namespace s21 {
 class Credit : public QWidget {
   Q_OBJECT
 
@@ -26,6 +27,8 @@ class Credit : public QWidget {
  private:
   Ui::Credit *ui;
   Result_credit *result_credit_window;
-};
 
+  s21::Controller controller_;
+};
+}
 #endif  // CREDIT_H

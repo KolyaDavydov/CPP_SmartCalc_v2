@@ -17,7 +17,8 @@ SOURCES += \
     result_credit.cpp \
     s21_smartcalc.c \
     ../controller/controller.cc \
-    ../model/model.cc
+    ../model/model.cc \
+    ../model/credit_model.cc
 
 HEADERS += \
     credit.h \
@@ -27,7 +28,8 @@ HEADERS += \
     result_credit.h \
     s21_smartcalc.h \
     ../controller/controller.h \
-    ../model/model.h
+    ../model/model.h \
+    ../model/credit_model.h
 
 FORMS += \
     credit.ui \

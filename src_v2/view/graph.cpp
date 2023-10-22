@@ -2,6 +2,7 @@
 
 #include "ui_graph.h"
 
+namespace s21 {
 Graph::Graph(QWidget *parent) : QWidget(parent), ui(new Ui::Graph) {
   ui->setupUi(this);
   connect(ui->pushButton_draw_graph, SIGNAL(clicked()), this,
@@ -12,12 +13,10 @@ Graph::~Graph() { delete ui; }
 
 void Graph::push_draw() {
   QString function = ui->label_function->text();
-  function.replace(".", ",");
-  QByteArray qba = function.toLocal8Bit();
-  char *function_on_c = qba.data();
+  std::string func = function.toStdString();
 
-  double result = 0.0;
-  int error = calc(function_on_c, &result, 0);
+  int error = controller_.Validate(func);
+  
   if (error == 0) {
     print_graph(function);
   } else {
@@ -29,9 +28,7 @@ void Graph::print_graph(QString function) {
 
   ui->custom_plot->clearGraphs();
 
-  function.replace(".", ",");
-  QByteArray qba = function.toLocal8Bit();
-  char *function_on_c = qba.data();
+  std::string func = function.toStdString();
 
   // задаем границы для графика
   double x_begin = ui->spinBox_min_x->value();
@@ -44,6 +41,7 @@ void Graph::print_graph(QString function) {
   double res = 0.0;
   QVector<double> x, y;
 
+
   // устанавливаем границы для графика
   ui->custom_plot->xAxis->setRange(x_begin, x_end);
   ui->custom_plot->yAxis->setRange(y_begin, y_end);
@@ -51,7 +49,7 @@ void Graph::print_graph(QString function) {
   int error = 0;
   for (X = x_begin; X < x_end && !error; X += h) {
     x.push_back(X);
-    error = calc(function_on_c, &res, X);
+    res = controller_.Calculate(func, X);
     y.push_back(res);
   }
   ui->custom_plot->addGraph();
@@ -64,4 +62,5 @@ void Graph::print_graph(QString function) {
 
   x.clear();
   y.clear();
+}
 }

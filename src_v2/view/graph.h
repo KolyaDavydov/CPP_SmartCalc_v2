@@ -4,6 +4,8 @@
 #include <QVector>
 #include <QWidget>
 
+#include "../controller/controller.h"
+
 extern "C" {
 #include "s21_smartcalc.h"
 }
@@ -11,7 +13,7 @@ extern "C" {
 namespace Ui {
 class Graph;
 }
-
+namespace s21 {
 class Graph : public QWidget {
   Q_OBJECT
 
@@ -26,6 +28,8 @@ class Graph : public QWidget {
 
  private:
   Ui::Graph *ui;
-};
 
+  s21::Controller controller_;
+};
+}
 #endif  // GRAPH_H

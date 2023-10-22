@@ -35,6 +35,9 @@ install: test cppcheck
 	# ./SmartCalcV1
 	make -C ../build
 
+open:
+	./../build/SmartCalcV1
+
 uninstall: clean
 	rm -rf ../build
 

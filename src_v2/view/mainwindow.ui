@@ -30,7 +30,6 @@
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -63,7 +62,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -96,7 +94,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -129,7 +126,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -162,7 +158,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -195,7 +190,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -228,7 +222,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -261,7 +254,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -294,7 +286,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -411,7 +402,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -931,7 +921,7 @@ QPushButton:pressed {
 }</string>
     </property>
     <property name="text">
-     <string>X</string>
+     <string>x</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_Graphics">
@@ -953,7 +943,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -992,7 +981,6 @@ QPushButton:pressed {
      <font>
       <family>Mukti</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -1041,7 +1029,6 @@ QPushButton:pressed {
      <font>
       <family>Ubuntu</family>
       <pointsize>10</pointsize>
-      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>

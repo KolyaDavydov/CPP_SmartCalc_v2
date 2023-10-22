@@ -7,7 +7,7 @@
 namespace Ui {
 class Result_credit;
 }
-
+namespace s21 {
 class Result_credit : public QWidget {
   Q_OBJECT
 
@@ -19,5 +19,5 @@ class Result_credit : public QWidget {
  private:
   Ui::Result_credit *ui;
 };
-
+}
 #endif  // RESULT_CREDIT_H
