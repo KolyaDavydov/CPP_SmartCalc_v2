@@ -25,7 +25,7 @@ tests: clean test/test.cc controller.a
 	./run
 
 gcov_report: tests
-	lcov -t "test" -o report.info -c -d .
+	lcov -t "test" -o report.info --no-external -c -d .
 	genhtml -o report report.info
 	open ./report/index.html
 
@@ -50,8 +50,7 @@ cppcheck:
 	rm .clang-format
 
 dvi:
-	$(TETEX) smartcalc.tex
-	rm *.aux *.log *.fdb_latexmk *.fls
+	open info/info.html
 
 dist: install
 	tar -cf ../SmartCalcV1.tar ../build

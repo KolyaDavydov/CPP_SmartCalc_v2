@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "../model/model.h"
+// #include "../model/model.h"
+#include "../controller/controller.h"
 
 TEST(SmartCalc, TestValidator) {
   s21::Model a;
@@ -286,6 +287,31 @@ TEST(SmartCalc, TestFunc25) {
   double res;
   res = (a.Validator(str));
   EXPECT_FLOAT_EQ(res, 1);
+}
+TEST(AnuityCreditCalc, TestFunc26) {
+  s21::Controller controller_;
+  double** matrix = controller_.Annuity_credit_calc(100000, 2, 7.1);
+  EXPECT_FLOAT_EQ(matrix[0][1], 50444.19);
+  EXPECT_FLOAT_EQ(matrix[0][2], 49852.52);
+  EXPECT_FLOAT_EQ(matrix[0][3], 591.67);
+  EXPECT_FLOAT_EQ(matrix[0][4], 50147.48);
+}
+TEST(DifCreditCalc, TestFunc27) {
+  s21::Controller controller_;
+  double** matrix = controller_.Dif_credit_calc(100000, 2, 7.1);
+  EXPECT_FLOAT_EQ(matrix[0][1], 50591.67);
+  EXPECT_FLOAT_EQ(matrix[0][2], 50000);
+  EXPECT_FLOAT_EQ(matrix[0][3], 591.67);
+  EXPECT_FLOAT_EQ(matrix[0][4], 50000);
+}
+TEST(Controller, TestFunc28) {
+  s21::Controller controller_;
+  std::string str = "1+3.5";
+  double result = controller_.Calculate(str, 0.0);
+  int error = controller_.Validate(str);
+  EXPECT_FLOAT_EQ(result, 4.5);
+  EXPECT_FLOAT_EQ(error, 0.0);
+
 }
 
 int main(int argc, char *argv[]) {

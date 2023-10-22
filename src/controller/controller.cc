@@ -29,9 +29,7 @@ int Controller::Validate(std::string& str) {
  * @brief аннуитентный тип расчета ежемесячных платежей
  *
  * @param sum сумма кредита
- *
  * @param months срок кредита в месяцах
- *
  * @param percent ставка годовых %
  *
  * @returns расчет ежемесячных платежей
@@ -45,9 +43,7 @@ double** Controller::Annuity_credit_calc(double sum, int months,
  * @brief дифферинцированный тип расчета ежемесячных платежей
  *
  * @param sum сумма кредита
- *
  * @param months срок кредита в месяцах
- *
  * @param percent ставка годовых %
  *
  * @returns расчет ежемесячных платежей
