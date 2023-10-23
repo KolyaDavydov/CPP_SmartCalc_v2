@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(src2 VERSION 0.1 LANGUAGES CXX)
+project(Calc VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -15,60 +15,69 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 set(PROJECT_SOURCES
         view/main.cpp
         view/mainwindow.cpp
-        view/mainwindow.h
-        view/mainwindow.ui
         view/credit.cpp
-        view/credit.h
-        view/credit.ui
         view/graph.cpp
-        view/graph.h
-        view/graph.ui
-        view/qcustomplot.cpp
-        view/qcustomplot.h
         view/result_credit.cpp
-        view/result_credit.h
-        view/result_credit.ui
         model/model.cc
-        model/model.h
         model/credit_model.cc
-        model/credit_model.h
         controller/controller.cc
+)
+
+set(PROJECT_HEADERS
+        view/mainwindow.h
+        view/credit.h
+        view/graph.h
+        view/result_credit.h
+        model/model.h
+        model/credit_model.h
         controller/controller.h
+)
+
+set(PROJECT_UI
+        view/mainwindow.ui
+        view/credit.ui
+        view/graph.ui
+        view/result_credit.ui
+)
+
+set(PROJECT_RSC
 
 )
 
+set(PROJECT_FILES ${PROJECT_RSC} ${PROJECT_UI} ${PROJECT_HEADERS} ${PROJECT_SOURCES})
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(src2
+    qt_add_executable(Calc
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET src2 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET Calc APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(src2 SHARED
+        add_library(Calc SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(src2
+        add_executable(Calc
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(src2 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Calc PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.src2)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.Calc)
 endif()
-set_target_properties(src2 PROPERTIES
+set_target_properties(Calc PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -77,12 +86,20 @@ set_target_properties(src2 PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS src2
+install(TARGETS Calc
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(src2)
+    qt_finalize_executable(Calc)
 endif()
+
+add_subdirectory(qcp)
+
+# QCustomPlot library
+target_link_libraries(${PROJECT_NAME} PRIVATE qcustomplot)
+
+# Compile needed definitions
+target_compile_definitions(${PROJECT_NAME} PRIVATE QCUSTOMPLOT_USE_LIBRARY)
