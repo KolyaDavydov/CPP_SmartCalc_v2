@@ -5,6 +5,7 @@
 #include <QWidget>
 
 #include "../controller/controller.h"
+#include "qcustomplot.h"
 
 // extern "C" {
 // #include "s21_smartcalc.h"

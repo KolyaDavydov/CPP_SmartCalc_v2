@@ -1,4 +1,4 @@
-CC=g++ #gcc -O0 -g
+CC=g++
 CFLAGS=-std=c++17 -Wall -Werror -Wextra
 PROFILE_FLAGS = -fprofile-arcs -ftest-coverage
 LIBSOURCES=controller/controller.cc model/model.cc model/credit_model.cc
@@ -9,7 +9,7 @@ TETEX=texi2dvi
 OS = $(shell uname)
 
 ifeq ($(OS), Linux)
-	CHECKFLAGS=-lgtest -lm -lpthread -lrt# -lsubunit
+	CHECKFLAGS=-lgtest -lm -lpthread -lrt
 else
 	CHECKFLAGS=-lgtest -lm -lpthread
 endif
@@ -33,17 +33,17 @@ else
 	open ./report/index.html
 endif
 
-install: test cppcheck
+install: clean
 	mkdir ../build
-	cd ../build; qmake ../src/view/SmartCalcV1.pro
-	# ./SmartCalcV1
+	cmake -S . -B ../build/
 	make -C ../build
 
 open:
-	./../build/SmartCalcV1
+	./../build/Calc
 
 uninstall: clean
 	rm -rf ../build
+	rm -rf build
 
 cppcheck:
 	cp ../materials/linters/.clang-format .clang-format
@@ -59,7 +59,7 @@ dvi:
 dist: install
 	tar -cf ../SmartCalcV1.tar ../build
 
-leaks: tests
+leaks: test
 	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=RESULT_VALGRIND.txt ./run
 
 clean:
@@ -72,7 +72,6 @@ clean:
 					*.log \
 					*.pdf \
 					*.gz \
-					*.txt \
 					*.so \
 					*.gcno \
 					*gcda \
