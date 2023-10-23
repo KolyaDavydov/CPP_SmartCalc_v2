@@ -3,9 +3,9 @@
  * @author Kolya Davydov
  * @brief функции для расчета выплаты кредита при заданных условиях
  * @version 2.0
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include "credit_model.h"
 

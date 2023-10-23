@@ -4,7 +4,6 @@ PROFILE_FLAGS = -fprofile-arcs -ftest-coverage
 LIBSOURCES=controller/controller.cc model/model.cc model/credit_model.cc
 LIBOBJECTS=$(LIBSOURCES:.cc=.o)
 VALGRIND_FLAGS = --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
-TETEX=texi2dvi
 
 OS = $(shell uname)
 

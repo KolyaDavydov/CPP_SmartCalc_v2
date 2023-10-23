@@ -296,8 +296,8 @@ TEST(AnuityCreditCalc, TestFunc26) {
   EXPECT_FLOAT_EQ(matrix[0][2], 49852.52);
   EXPECT_FLOAT_EQ(matrix[0][3], 591.67);
   EXPECT_FLOAT_EQ(matrix[0][4], 50147.48);
-  
-  for(int i = 0; i < months; i++) {
+
+  for (int i = 0; i < months; i++) {
     delete[] matrix[i];
   }
   delete[] matrix;
@@ -311,7 +311,7 @@ TEST(DifCreditCalc, TestFunc27) {
   EXPECT_FLOAT_EQ(matrix[0][3], 591.67);
   EXPECT_FLOAT_EQ(matrix[0][4], 50000);
 
-  for(int i = 0; i < months; i++) {
+  for (int i = 0; i < months; i++) {
     delete[] matrix[i];
   }
   delete[] matrix;
@@ -323,10 +323,9 @@ TEST(Controller, TestFunc28) {
   int error = controller_.Validate(str);
   EXPECT_FLOAT_EQ(result, 4.5);
   EXPECT_FLOAT_EQ(error, 0.0);
-
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

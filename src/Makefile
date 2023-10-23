@@ -4,7 +4,6 @@ PROFILE_FLAGS = -fprofile-arcs -ftest-coverage
 LIBSOURCES=controller/controller.cc model/model.cc model/credit_model.cc
 LIBOBJECTS=$(LIBSOURCES:.cc=.o)
 VALGRIND_FLAGS = --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
-TETEX=texi2dvi
 
 OS = $(shell uname)
 
@@ -57,9 +56,9 @@ dvi:
 	open info/info.html
 
 dist: install
-	tar -cf ../SmartCalcV1.tar ../build
+	tar -cf ../SmartCalcV2.tar ../build
 
-leaks: test
+leaks: tests
 	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=RESULT_VALGRIND.txt ./run
 
 clean:
@@ -83,12 +82,13 @@ clean:
 					vtests_run \
 					*.dvi \
 					run \
-					SmartCalcV1 \
+					SmartCalcV2 \
 					.qmake.stash \
 					gcov \
 					report/ \
 					../app/ \
 					report.info \
 					controller/*.o \
-					model/*.o
+					model/*.o \
+					RESULT_VALGRIND.txt
 
