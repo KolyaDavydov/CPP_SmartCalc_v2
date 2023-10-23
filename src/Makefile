@@ -13,7 +13,7 @@ else
 	CHECKFLAGS=-lgtest -lm -lpthread
 endif
 
-all: tests
+all: install
 
 controller.a: $(LIBOBJECTS)
 	ar -crs controller.a $(LIBOBJECTS)
