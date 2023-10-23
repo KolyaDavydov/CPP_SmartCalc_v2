@@ -9,7 +9,7 @@ TETEX=texi2dvi
 OS = $(shell uname)
 
 ifeq ($(OS), Linux)
-	CHECKFLAGS=-lgtest -lm -lpthread -lrt -lsubunit
+	CHECKFLAGS=-lgtest -lm -lpthread -lrt# -lsubunit
 else
 	CHECKFLAGS=-lgtest -lm -lpthread
 endif
@@ -27,7 +27,11 @@ tests: clean test/test.cc controller.a
 gcov_report: tests
 	lcov -t "test" -o report.info --no-external -c -d .
 	genhtml -o report report.info
+ifeq ($(OS), Linux)
+	xdg-open ./report/index.html
+else
 	open ./report/index.html
+endif
 
 install: clean
 	mkdir ../build
