@@ -289,20 +289,32 @@ TEST(SmartCalc, TestFunc25) {
   EXPECT_FLOAT_EQ(res, 1);
 }
 TEST(AnuityCreditCalc, TestFunc26) {
+  int months = 2;
   s21::Controller controller_;
-  double** matrix = controller_.Annuity_credit_calc(100000, 2, 7.1);
+  double** matrix = controller_.Annuity_credit_calc(100000, months, 7.1);
   EXPECT_FLOAT_EQ(matrix[0][1], 50444.19);
   EXPECT_FLOAT_EQ(matrix[0][2], 49852.52);
   EXPECT_FLOAT_EQ(matrix[0][3], 591.67);
   EXPECT_FLOAT_EQ(matrix[0][4], 50147.48);
+  
+  for(int i = 0; i < months; i++) {
+    delete[] matrix[i];
+  }
+  delete[] matrix;
 }
 TEST(DifCreditCalc, TestFunc27) {
+  int months = 2;
   s21::Controller controller_;
-  double** matrix = controller_.Dif_credit_calc(100000, 2, 7.1);
+  double** matrix = controller_.Dif_credit_calc(100000, months, 7.1);
   EXPECT_FLOAT_EQ(matrix[0][1], 50591.67);
   EXPECT_FLOAT_EQ(matrix[0][2], 50000);
   EXPECT_FLOAT_EQ(matrix[0][3], 591.67);
   EXPECT_FLOAT_EQ(matrix[0][4], 50000);
+
+  for(int i = 0; i < months; i++) {
+    delete[] matrix[i];
+  }
+  delete[] matrix;
 }
 TEST(Controller, TestFunc28) {
   s21::Controller controller_;

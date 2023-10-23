@@ -3,7 +3,7 @@ CFLAGS=-std=c++17 -Wall -Werror -Wextra
 PROFILE_FLAGS = -fprofile-arcs -ftest-coverage
 LIBSOURCES=controller/controller.cc model/model.cc model/credit_model.cc
 LIBOBJECTS=$(LIBSOURCES:.cc=.o)
-
+VALGRIND_FLAGS = --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --verbose
 TETEX=texi2dvi
 
 OS = $(shell uname)
@@ -60,7 +60,7 @@ dist: install
 	tar -cf ../SmartCalcV1.tar ../build
 
 leaks: test
-	valgrind --leak-check=full --quiet ./run
+	CK_FORK=no valgrind $(VALGRIND_FLAGS) --log-file=RESULT_VALGRIND.txt ./run
 
 clean:
 	rm -rf *.o \
